@@ -12,6 +12,11 @@ Route::group(array('before' => 'guest'), function()
 // for any logged in user
 Route::group(array('before' => 'auth'), function()
 {
+	Route::get('info/show/{id}',['as'=>'info.show','uses'=>'InfoController@show']);
+	Route::get('info/edit/{id}',['as'=>'info.edit','uses'=>'InfoController@edit']);
+	Route::put('info/edit/{id}',['as'=>'info.update','uses'=>'InfoController@update']);
+	Route::get('info/{id}',['as'=>'info.create','uses'=>'InfoController@create']);
+	Route::post('info/{id}',['uses'=>'InfoController@store']);
 	Route::get('cridential',['as'=>'user.update','uses' => 'UserController@edit']);
 	Route::put('cridential',['uses' => 'UserController@update']);
 	Route::get('logout', array('as' => 'logout', 'uses' => 'UserController@logout'));

@@ -5,7 +5,14 @@
 		
 		@if(Auth::check())
 			<div class="page-header">
-				<h2>Welcome {{ Auth::user()->user_name }}</h2>
+				<h2>Welcome 
+					@if(!is_null(Info::where('user_id','=',Auth::user()->id)->first()))
+					{{Info::where('user_id','=',Auth::user()->id)->first()->title}}
+					{{ Auth::user()->user_name }}
+					@else
+						{{ Auth::user()->user_name }}
+					@endif
+				</h2>
 			</div>
 		
 		@else

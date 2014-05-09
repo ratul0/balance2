@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration {
 			$table->string('email', 40);
 			$table->string('password');
 			$table->integer('role_id')->unsigned();
+			$table->integer('first_login')->unsigned()->default(0);
 			$table->integer('distributor_status')->unsigned()->default(0);
 			$table->integer('distributor_approve')->unsigned()->default(0);
 			$table->integer('varification_status')->unsigned()->default(0);

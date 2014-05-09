@@ -23,7 +23,7 @@
 					<tr>
 
 						<td>{{ $group->category }}</td>
-						<td>{{ $group->amount }}</td>
+						<td>{{ Pin::where('category','=',$group->category)->count() }}</td>
 						<td>
 							@if(!$group->distributor_id)
 								<span class="glyphicon glyphicon-remove text-danger"></span>

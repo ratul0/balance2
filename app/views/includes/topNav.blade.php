@@ -25,8 +25,10 @@
                         <li><a href="{{ URL::route('pin') }}">Pin</a></li>
                     @elseif(Session::get('role') == 2)
                         <li><a href="{{ URL::route('distributors') }}">View Pins</a></li>
+                         <li><a href="{{ URL::route('info.show',Auth::user()->id) }}">Profile</a></li>
                     @elseif(Session::get('role') == 3)
                         <li><a href="{{ URL::route('client.add') }}">Enter Pin</a></li>
+                        <li><a href="{{ URL::route('info.show',Auth::user()->id) }}">Profile</a></li>
 
                     @endif
 

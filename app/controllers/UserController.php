@@ -56,6 +56,12 @@ class UserController extends BaseController {
 			{
 				Session::put('role', Auth::user()->role_id);
 				
+				//return User::where('id','=',Auth::user()->id)->first();
+				if(User::where('id','=',Auth::user()->id)->first()->first_login == 0){
+					
+					return Redirect::route('info.create',[Auth::user()->id]);
+				}
+				
 			    return Redirect::intended('/');
 			}
 			else
@@ -78,7 +84,7 @@ class UserController extends BaseController {
 						->with('success', 'You have been logged out.');
 	}
 
-	function show(){
+	public function show(){
 
 		if(Auth::check()){
 			if(Auth::user()->role_id==1){

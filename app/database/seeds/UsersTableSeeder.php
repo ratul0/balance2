@@ -32,7 +32,7 @@ class UsersTableSeeder extends Seeder {
 				'email'      =>'client@infancy.com',
 				'password'   => Hash::make('client'),
 				'role_id'    => 3,
-				'varification_status'	=> 0,
+				'varification_status'	=> 1,
 				'created_at' => date('Y-m-d H-i-s'),
 				'updated_at' => date('Y-m-d H-i-s')
 			)
