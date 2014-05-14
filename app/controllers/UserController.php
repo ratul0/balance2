@@ -233,6 +233,54 @@ class UserController extends BaseController {
 		
 	}
 
+	public function passwordRecover(){
+		$rules = array
+		(
+	    	'email' 	=> 'required|email'
+
+		);
+
+		$validation = Validator::make(Input::all(),$rules);
+
+		if($validation->fails()){
+
+			return Redirect::route('login')
+								->with('error', 'Invalid Email Address. Try again.');
+
+		}else{
+			$code = str_random(25);
+
+			$userUpdate = ['recovery_code' => $code];
+			User::where('email','=',Input::get('email'))->update($userUpdate);
+			$data = ['code'=>$code];
+			
+			//send mail
+			Mail::send('emails.recover',$data,function($message){
+					$message->to(Input::get('email'))->subject('Recover Your Account.');
+				});
+			return Redirect::route('login')
+								->with('success', 'Request Send successfully.Please Recover Your Account.');
+			//return User::where('email','=',Input::get('email'))->get();
+		}
+
+
+	}
+
+	public function mailRecover($code){
+		$user = User::where('recovery_code','=',$code)->first();
+		if(! is_null($user)){
+			
+			Auth::login($user);
+			return View::make('users.edit')
+				->with('title','Update Cridentials')
+				->with('user',User::where('id','=',$user->id)->first());
+		}else{
+			return Redirect::route('login')
+								->with('error', 'Recovery Failed.Try again');
+		}
+	}
+
+
 	
 
 

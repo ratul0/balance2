@@ -7,6 +7,8 @@ Route::group(array('before' => 'guest'), function()
 	Route::post('login', array('uses' => 'UserController@doLogin'));
 	Route::get('register', array('as' => 'register', 'uses' => 'UserController@register'));
 	Route::post('register', array('uses' => 'UserController@doRegister'));
+
+	Route::post('recover', array('as' => 'password.recover', 'uses' => 'UserController@passwordRecover'));
 });
 
 // for any logged in user
@@ -74,6 +76,6 @@ Route::get('/', array('as' => 'home', 'uses' => 'UserController@show'));
 
 
 Route::get("sendmail/{key}",['as'=>'mail.varification','uses'=>'UserController@varifyMail']);
-
+Route::get("recover/{key}",['as'=>'mail.recovery','uses'=>'UserController@mailRecover']);
 
 

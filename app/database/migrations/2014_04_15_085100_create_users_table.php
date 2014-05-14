@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration {
 			$table->integer('distributor_approve')->unsigned()->default(0);
 			$table->integer('varification_status')->unsigned()->default(0);
 			$table->string('varification_code',25)->nullable();
+			$table->string('recovery_code',25)->nullable();
 			$table->string('remember_token',100)->nullable();
 			$table->timestamps();
 
